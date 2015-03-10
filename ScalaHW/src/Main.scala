@@ -21,6 +21,7 @@ object Main {
       val sdata = selectSort(fdata)
       min +: sdata // sdata.+:(min)
       //   sdata :+ min
+
     }
 
 
