@@ -17,7 +17,7 @@ object Main {
   def selectSort(data: List[Int]): List[Int] = {
     if (data.length <= 1) data
     else {
-      val min = data.min;
+      val min = data.min
       val mins = data.filter(_ == min)
       val rest = data.filter(_ > min)
       val sl = selectSort(rest)
@@ -28,7 +28,7 @@ object Main {
   def selectSort2(data: List[Int]): List[Int] = {
     if (data.length <= 1) data
     else {
-      val min = data.min;
+      val min = data.min
       def pred(n: Int) = n == min
       val mins = data.filter(pred)
       val rest = data.filter(_ > min)

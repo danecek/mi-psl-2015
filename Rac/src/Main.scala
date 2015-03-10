@@ -4,27 +4,23 @@
 object Main {
   def main(args: Array[String]) {
 
-    import Rac._
+    import Rational._
 
-    val r = (3 %% 2)
-    println(3 %% 2 + 4 )
-    println(r.copy())
+    val r = Rational(30, 2)
 
+    println(r)
+    println(2 / r)
+    println(r / Rational(3, 4))
+    println(r / 3)
+    println(r == Rational(15, 1))
+    val rc = r.copy()
+    println(rc == r)
+    val rc2 = r.copy(n = 10)
+    println(rc2 == r)
+
+    //**********************************************
+    println(30 ## 2 / 3 ## 4)
+    println(30 ## 2 * 3 ## 4)
   }
 
 }
-
-case class Rac( x: Int,  y: Int) {
-
-   def%%(x: Int) = Rac(x, y)
-   def +(x2: Int) = Rac(x + x2, y)
-}
-
-object Rac {
-
-  implicit def toRac(i: Int) : Rac = new Rac(i, 1)
-
-
-}
-
-
