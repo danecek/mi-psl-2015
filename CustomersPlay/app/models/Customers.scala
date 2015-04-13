@@ -25,7 +25,11 @@ object Customers {
 //    customers = customers + (c.username -> c)
 //  }
    def add(c: Customer) {
-  //  customers = customers + (c.username -> c)
+    DB.withConnection { implicit connection =>
+      val insertCustomer = SQL("INSERT INTO CUSTOMERS VALUES({username}, {age})").on("username"->c.username,
+                                                                                   "age"->c.age)
+      insertCustomer.executeUpdate()//(connection)
+    }
      
   } 
 
