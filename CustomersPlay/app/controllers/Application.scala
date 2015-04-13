@@ -19,7 +19,7 @@ object Application extends Controller {
 +"INSERT INTO CUSTOMERS VALUES('john@fit.cvut.cz', 1);"
 +"INSERT INTO CUSTOMERS VALUES('mary@fit.cvut.cz', 2);"
 ).executeUpdate()
-  }(play.api.Play.current)
+  }(play.api.Play.   current)
   
   def indexView = Action {
       Ok(views.html.index("customers.manager")) // empty parentheses must be here
