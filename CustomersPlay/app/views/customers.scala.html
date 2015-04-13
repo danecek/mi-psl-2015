@@ -1,0 +1,26 @@
+@* customers Template File *@
+@layout("customers") {
+	
+<table border="1">
+     <thead>
+       <tr>
+         <th>@Messages("username")</th>
+         <th>@Messages("age")</th>
+       </tr>
+    </thead>
+    <tbody>
+	@for(customer <-  Customers.all) {
+	  <tr>
+		<td>
+		  @customer.username
+		</td>
+		<td>
+		  @customer.age
+		</td>
+	  </tr>
+	}
+	 </tbody>
+   </table>	
+ <hr>
+ <a href="@routes.Application.addCustomerView" >Add Customer</a>
+}

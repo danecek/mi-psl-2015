@@ -1,0 +1,11 @@
+@* addcustomer Template File *@
+@(customerForm: Form[Customer])
+
+@layout("add.customer") {
+
+@helper.form(action = routes.Application.addCustomerSubmit()) { 
+    @helper.inputText(customerForm("username"))
+    @helper.inputText(customerForm("age"))
+    <input type="submit" value='@Messages("add.customer")'/>
+}
+}
