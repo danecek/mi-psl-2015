@@ -5,8 +5,21 @@ import play.api.data.Form
 import play.api.data.Forms.{email, mapping, number}
 import play.api.mvc.{Action, Controller, Results}
 import play.api.Logger
+import play.api.db.DB
+import anorm._
+import play.api.Play.current
 
 object Application extends Controller {
+  
+   DB.withConnection { implicit connection =>
+ //    Create an SQL query
+   SQL(
+      "DROP TABLE IF EXISTS CUSTOMERS;"
++"CREATE TABLE CUSTOMERS(USERNAME VARCHAR(255) PRIMARY KEY, AGE INT);"
++"INSERT INTO CUSTOMERS VALUES('john@fit.cvut.cz', 1);"
++"INSERT INTO CUSTOMERS VALUES('mary@fit.cvut.cz', 2);"
+).executeUpdate()
+  }(play.api.Play.current)
   
   def indexView = Action {
       Ok(views.html.index("customers.manager")) // empty parentheses must be here
