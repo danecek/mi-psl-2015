@@ -55,5 +55,11 @@ object Application extends Controller {
           Results.Redirect(routes.Application.customersView)
         })
     }
+  
+   def deleteCustomerSubmit(username : String) =
+    Action {
+     Customers.delete(customer)
+     Results.Redirect(routes.Application.customersView)
+    }
 }
 

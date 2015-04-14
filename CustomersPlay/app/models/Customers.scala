@@ -50,4 +50,12 @@ object Customers {
       Customer(row[String]("username"), row[Int]("age"))
     }
   }
+
+  def delete(username: String) {
+    DB.withConnection { implicit connection =>
+      val selCustomers = SQL("select * from  CUSTOMERS WHERE username = {username}").on("username" -> username)
+      val row = selCustomers.single() //(connection)
+      Customer(row[String]("username"), row[Int]("age"))
+    }
+  }
 }
