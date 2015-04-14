@@ -1,0 +1,12 @@
+@* deletecustomer Template File *@
+@(customer : Customer)
+
+@layout("delete.customer") {
+	
+	<form action = @{"customers/deleteCustomer?username=" + customer.username} method = "POST">
+      @customer.username
+      @customer.age
+      <input type="submit" value='delete.customer'/>
+    </form>
+   
+}
