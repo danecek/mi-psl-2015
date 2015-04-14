@@ -9,6 +9,11 @@ GET     /customers                  controllers.Application.customersView
 
 GET     /customers/addCustomer      controllers.Application.addCustomerView
 
+GET     /customers/deleteCustomer   controllers.Application.deleteCustomerView(username : String)
+
+POST     /customers/deleteCustomer   controllers.Application.deleteCustomerView(username : String)
+
+
 POST    /customers/addCustomer      controllers.Application.addCustomerSubmit
 
 # Map static resources from the /public folder to the /assets URL path

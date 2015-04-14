@@ -41,6 +41,11 @@ object Application extends Controller {
     Ok(views.html.addCustomer(customerForm))
   }
 
+  def deleteCustomerView(username : String) = Action {
+    val customer = Customers.find(username)
+    Ok(views.html.deleteCustomer(customer))
+  }
+  
   def addCustomerSubmit =
     Action { implicit request =>
       customerForm.bindFromRequest.fold(

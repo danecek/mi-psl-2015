@@ -6,6 +6,8 @@
        <tr>
          <th>@Messages("username")</th>
          <th>@Messages("age")</th>
+         <th>@Messages("age")</th>
+         <th>@Messages("Delete")</th>
        </tr>
     </thead>
     <tbody>
@@ -17,6 +19,9 @@
 		<td>
 		  @customer.age
 		</td>
+		<td>
+		  <a href = @{"customers/deleteCustomer?username=" + customer.username}>Delete</a>
+		</td>	
 	  </tr>
 	}
 	 </tbody>
