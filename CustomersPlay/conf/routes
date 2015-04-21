@@ -3,18 +3,21 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.indexView
+GET     /                              controllers.Application.indexView
 
-GET     /customers                  controllers.Application.customersView
+GET     /customers                     controllers.Application.customersView
 
-GET     /customers/addCustomer      controllers.Application.addCustomerView
+GET     /customers/updateCustomerForm/:username     controllers.Application.updateCustomerView(username : String)
 
-GET     /customers/deleteCustomer   controllers.Application.deleteCustomerView(username : String)
+POST    /customers/updateCustomerSubmit   controllers.Application.updateCustomerSubmit()
 
-DELETE  /customers/deleteCustomer   controllers.Application.deleteCustomer(username : String)
+GET     /customers/addCustomerForm     controllers.Application.addCustomerView
 
+POST    /customers/addCustomerSubmit   controllers.Application.addCustomerSubmit()
 
-POST    /customers/addCustomer      controllers.Application.addCustomerSubmit
+GET     /customers/deleteCustomerForm/:username   controllers.Application.deleteCustomerView(username : String)
+
+POST    /customers/deleteCustomerSubmit/:username  controllers.Application.deleteCustomerSubmit(username : String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

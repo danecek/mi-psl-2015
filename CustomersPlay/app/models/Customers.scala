@@ -5,7 +5,6 @@ import play.api.mvc._
 import play.api.db._
 import anorm._
 import play.api.Play._
-
 import play.api.db.DB
 
 /**
@@ -24,22 +23,23 @@ object Customers {
   //  def add(c: Customer) {
   //    customers = customers + (c.username -> c)
   //  }
+  
   def add(c: Customer) {
     DB.withConnection { implicit connection =>
       val insertCustomer = SQL("INSERT INTO CUSTOMERS VALUES({username}, {age})").on("username" -> c.username,
         "age" -> c.age)
-      insertCustomer.executeUpdate() //(connection)
+      insertCustomer.executeUpdate//()//(connection)
     }
-
   }
 
   def all: List[Customer] = {
     DB.withConnection { implicit connection =>
-      val selCustomers = SQL("select * from  CUSTOMERS")
-      val qresult = selCustomers.executeQuery() //(connection)
-      qresult() //(connection)
+      val selCustomers = SQL("SELECT * FROM  CUSTOMERS")
+      val qresult = selCustomers.executeQuery// ()(connection)
+      qresult()//.apply()(connection)
         .map(row =>
-          Customer(row[String]("username"), row[Int]("age"))).toList
+          Customer(row[String]("username")//(Column.columnToString)
+              , row[Int]("age"))).toList
     }
   }
 
@@ -53,9 +53,15 @@ object Customers {
 
   def delete(username: String) {
     DB.withConnection { implicit connection =>
-      val selCustomers = SQL("select * from  CUSTOMERS WHERE username = {username}").on("username" -> username)
-      val row = selCustomers.single() //(connection)
-      Customer(row[String]("username"), row[Int]("age"))
+      val selCustomers = SQL("DELETE FROM CUSTOMERS WHERE USERNAME = {username}").on("username" -> username)
+      selCustomers.executeUpdate      
+    }
+  }
+  def update(customer: Customer) {
+    DB.withConnection { implicit connection =>
+      val selCustomers = SQL("UPDATE CUSTOMERS SET AGE={age} WHERE USERNAME= {username}").
+      on("username" -> customer.username, "age"->customer.age)
+      selCustomers.executeUpdate      
     }
   }
 }

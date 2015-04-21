@@ -3,10 +3,10 @@
 
 @layout("delete.customer") {
 	
-	<form action = @{"customers/deleteCustomer?username=" + customer.username} method = "POST">
+	<form action = '@{"/customers/deleteCustomerSubmit/"  + customer.username}'   method = "POST">
       @customer.username
       @customer.age
-      <input type="submit" value='delete.customer'/>
+      <input type="submit" value= "Delete Customer" onSubmit = "form.submit"/>
     </form>
    
 }

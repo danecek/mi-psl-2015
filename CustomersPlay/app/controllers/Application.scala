@@ -14,13 +14,12 @@ object Application extends Controller {
   DB.withConnection { implicit connection =>
     try {
       SQL(
-        //   "DROP TABLE IF EXISTS CUSTOMERS;"+
         "CREATE TABLE CUSTOMERS(USERNAME VARCHAR(255) PRIMARY KEY, AGE INT);"
           + "INSERT INTO CUSTOMERS VALUES('john@fit.cvut.cz', 1);"
           + "INSERT INTO CUSTOMERS VALUES('mary@fit.cvut.cz', 2);").executeUpdate()
-    } catch { case _ : Exception => () }
+    } catch { case _: Exception => () }
 
-  }(play.api.Play.current)
+  } //(play.api.Play.current)
 
   def indexView = Action {
     Ok(views.html.index("customers.manager")) // empty parentheses must be here
@@ -41,11 +40,16 @@ object Application extends Controller {
     Ok(views.html.addCustomer(customerForm))
   }
 
-  def deleteCustomerView(username : String) = Action {
+  def updateCustomerView(username: String) = Action {
+    val c = Customers.find(username)
+    Ok(views.html.updateCustomer(customerForm.bind(Map("username" -> c.username.toString(), "age" -> c.age.toString))))
+  }
+
+  def deleteCustomerView(username: String) = Action {
     val customer = Customers.find(username)
     Ok(views.html.deleteCustomer(customer))
   }
-  
+
   def addCustomerSubmit =
     Action { implicit request =>
       customerForm.bindFromRequest.fold(
@@ -55,11 +59,21 @@ object Application extends Controller {
           Results.Redirect(routes.Application.customersView)
         })
     }
-  
-   def deleteCustomerSubmit(username : String) =
+
+  def deleteCustomerSubmit(username: String) =
     Action {
-     Customers.delete(customer)
-     Results.Redirect(routes.Application.customersView)
+      Customers.delete(username)
+      Results.Redirect(routes.Application.customersView)
     }
+  def updateCustomerSubmit() =
+    Action { implicit request =>
+      customerForm.bindFromRequest.fold(
+        errorsCustomerForm => BadRequest(views.html.addCustomer(errorsCustomerForm)),
+        customer => {
+          Customers.update(customer)
+          Results.Redirect(routes.Application.customersView)
+        })
+    }
+
 }
 

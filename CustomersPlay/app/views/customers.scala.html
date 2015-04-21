@@ -6,8 +6,8 @@
        <tr>
          <th>@Messages("username")</th>
          <th>@Messages("age")</th>
-         <th>@Messages("age")</th>
-         <th>@Messages("Delete")</th>
+         <th>@Messages("delete")</th>
+         <th>@Messages("update")</th>
        </tr>
     </thead>
     <tbody>
@@ -20,7 +20,10 @@
 		  @customer.age
 		</td>
 		<td>
-		  <a href = @{"customers/deleteCustomer?username=" + customer.username}>Delete</a>
+		  <a href = @{"customers/deleteCustomerForm/" + customer.username}>@Messages("delete")</a>
+		</td>	
+		<td>
+		  <a href = @{"customers/updateCustomerForm/" + customer.username}>@Messages("update")</a>
 		</td>	
 	  </tr>
 	}
